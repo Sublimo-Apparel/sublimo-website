@@ -1,0 +1,576 @@
+[
+  {
+    "image": "img/designs/tabaco-rider-express.jpg",
+    "name": "Tabaco Rider Express",
+    "type": "Long sleeves",
+    "description": "Black rider jersey with red cuffs and a Mayon-and-church badge on the back.",
+    "description_tl": "Itim na rider jersey na may pulang cuffs at badge ng Mayon at simbahan sa likod."
+  },
+  {
+    "image": "img/designs/vani-adventures.jpg",
+    "name": "Vani Adventures",
+    "type": "Long sleeves",
+    "description": "Black and red tire-track print with a compass and a sunset camp badge.",
+    "description_tl": "Itim at pulang tire-track print na may compass at badge ng camping sa takipsilim."
+  },
+  {
+    "image": "img/designs/smnhs-techpro.jpg",
+    "name": "San Miguel NHS · Technical Professional",
+    "type": "Polo",
+    "description": "Pink and white polo with a tools-and-gears emblem.",
+    "description_tl": "Pink at puting polo na may emblem ng gamit at gear."
+  },
+  {
+    "image": "img/designs/sanhs-pencak-silat.jpg",
+    "name": "SANHS Tabaco Pencak Silat",
+    "type": "Shirt",
+    "description": "Black with gold filigree and ornate lettering.",
+    "description_tl": "Itim na may gold na filigree at magarbong letra."
+  },
+  {
+    "image": "img/designs/sanhs-viper.jpg",
+    "name": "SANHS Viper",
+    "type": "Jersey",
+    "description": "Gold and black with star panels and a hustle quote on the back.",
+    "description_tl": "Gold at itim na may bituin at hustle quote sa likod."
+  },
+  {
+    "image": "img/designs/sanhs-viper-shorts.jpg",
+    "name": "SANHS Viper Shorts",
+    "type": "Shorts",
+    "description": "Matching gold shorts with stars and black stripes.",
+    "description_tl": "Kaparehong gold na shorts na may bituin at itim na guhit."
+  },
+  {
+    "image": "img/designs/sanrho-builders.jpg",
+    "name": "Sanrho Builders",
+    "type": "Polo",
+    "description": "Gray and white company polo with a construction sketch.",
+    "description_tl": "Gray at puting polo ng kompanya na may sketch ng konstruksyon."
+  },
+  {
+    "image": "img/designs/sjcc-cba-faculty.jpg",
+    "name": "SJCC CBA Faculty",
+    "type": "Polo",
+    "description": "Black, white and gold faculty polo with a torch watermark.",
+    "description_tl": "Itim, puti at gold na polo ng faculty na may sulo."
+  },
+  {
+    "image": "img/designs/bcaed-hesperus.jpg",
+    "name": "BCAED Empire of Hesperus",
+    "type": "Jersey",
+    "description": "Orange to red fade with gothic gold letters and a bull.",
+    "description_tl": "Orange hanggang pula na may gothic na gold na letra at toro."
+  },
+  {
+    "image": "img/designs/bcaed-hesperus-shorts.jpg",
+    "name": "BCAED Empire of Hesperus Shorts",
+    "type": "Shorts",
+    "description": "Matching orange shorts with a woven pattern.",
+    "description_tl": "Kaparehong orange na shorts na may habing disenyo."
+  },
+  {
+    "image": "img/designs/bcaed-volleyball.jpg",
+    "name": "BCAED Blancaflor Volleyball",
+    "type": "Shirt",
+    "description": "The Hesperus design as a volleyball shirt with white sleeves.",
+    "description_tl": "Ang disenyong Hesperus bilang volleyball shirt na may puting manggas."
+  },
+  {
+    "image": "img/designs/spider-strikers.jpg",
+    "name": "Spider Strikers",
+    "type": "Shirt",
+    "description": "Red and black brush strokes with a spider emblem.",
+    "description_tl": "Pula at itim na brush strokes na may gagamba."
+  },
+  {
+    "image": "img/designs/tabaco-college-gold.jpg",
+    "name": "Tabaco College · Gold",
+    "type": "Jersey",
+    "description": "Yellow with royal blue slashes and a mountain hem.",
+    "description_tl": "Dilaw na may royal blue na guhit at bundok sa laylayan."
+  },
+  {
+    "image": "img/designs/tabaco-college-blue.jpg",
+    "name": "Tabaco College · Blue",
+    "type": "Jersey",
+    "description": "Royal blue with gold slashes and the varsity script.",
+    "description_tl": "Royal blue na may gold na guhit at varsity na letra."
+  },
+  {
+    "image": "img/designs/vanguard-criminology.jpg",
+    "name": "Vanguard Criminology",
+    "type": "Chinese collar",
+    "description": "Blue hex pattern with Lady Justice and a crosshair back.",
+    "description_tl": "Asul na hex pattern na may Lady Justice at crosshair sa likod."
+  },
+  {
+    "image": "img/designs/vanguard.jpg",
+    "name": "Vanguard",
+    "type": "Jersey",
+    "description": "Royal blue with a shield crest and halftone side panels.",
+    "description_tl": "Royal blue na may shield crest at halftone sa gilid."
+  },
+  {
+    "image": "img/designs/vanguard-shorts.jpg",
+    "name": "Vanguard Shorts",
+    "type": "Shorts",
+    "description": "Matching royal blue shorts with halftone sides.",
+    "description_tl": "Kaparehong royal blue na shorts na may halftone sa gilid."
+  },
+  {
+    "image": "img/designs/yellow-tigers.jpg",
+    "name": "Yellow Tigers",
+    "type": "Jersey",
+    "description": "Full tiger artwork in gold, black and white.",
+    "description_tl": "Buong tiger artwork sa gold, itim at puti."
+  },
+  {
+    "image": "img/designs/tabaco-neu-jersey.jpg",
+    "name": "Tabaco City NEU",
+    "type": "Jersey",
+    "description": "Purple, yellow and white halftone fade.",
+    "description_tl": "Violet, dilaw at puting halftone fade."
+  },
+  {
+    "image": "img/designs/tabaco-neu-shorts.jpg",
+    "name": "Tabaco City NEU Shorts",
+    "type": "Shorts",
+    "description": "Matching halftone shorts with the DepEd NEU patch.",
+    "description_tl": "Kaparehong halftone shorts na may patch ng DepEd NEU."
+  },
+  {
+    "image": "img/designs/tabaco-neu-polo.jpg",
+    "name": "Tabaco City NEU Polo",
+    "type": "Polo",
+    "description": "The NEU halftone design as a collared polo.",
+    "description_tl": "Ang disenyong NEU bilang polo na may kwelyo."
+  },
+  {
+    "image": "img/designs/eagle-shorts.jpg",
+    "name": "Eagle Shorts",
+    "type": "Shorts",
+    "description": "Black with gold lightning trim and an eagle mascot.",
+    "description_tl": "Itim na may gold na kidlat at agilang mascot."
+  },
+  {
+    "image": "img/designs/buntis-class.jpg",
+    "name": "Buntis Class 2026",
+    "type": "Shirt",
+    "description": "Pink gradient with a mother outline and a Tabaco City Health Office back.",
+    "description_tl": "Pink na gradient na may larawan ng ina at likod ng Tabaco City Health Office."
+  },
+  {
+    "image": "img/designs/ccstai-faculty.jpg",
+    "name": "CCSTAI Faculty",
+    "type": "Shirt",
+    "description": "White to royal blue V-neck with varsity lettering.",
+    "description_tl": "Puti hanggang royal blue na V-neck na may varsity na letra."
+  },
+  {
+    "image": "img/designs/smnhs-grade9.jpg",
+    "name": "San Miguel NHS · Grade 9",
+    "type": "Shirt",
+    "description": "Red, black and gold class shirt with sharp slashes.",
+    "description_tl": "Pula, itim at gold na class shirt na may matutulis na guhit."
+  },
+  {
+    "image": "img/designs/deped-lilac.jpg",
+    "name": "Hacienda High School Faculty",
+    "type": "Chinese collar",
+    "description": "Lilac Chinese collar with woven shoulder bands and a diamond pattern.",
+    "description_tl": "Lilac na Chinese collar na may habing banda sa balikat at diamond na disenyo."
+  },
+  {
+    "image": "img/designs/harmony.jpg",
+    "name": "Harmony",
+    "type": "Jersey",
+    "description": "Royal blue digital camo with red numbers.",
+    "description_tl": "Royal blue na digital camo na may pulang numero."
+  },
+  {
+    "image": "img/designs/miss-teen-karagumoy.jpg",
+    "name": "Miss Teen Karagumoy 2026",
+    "type": "Polo",
+    "description": "Bacacay pageant organizer polo with a woven mosaic pattern.",
+    "description_tl": "Polo ng organizer ng pageant sa Bacacay na may habing mosaic."
+  },
+  {
+    "image": "img/designs/ntm-green.jpg",
+    "name": "National Teachers' Month · Green",
+    "type": "Polo",
+    "description": "White polo with watercolor leaves and an open book.",
+    "description_tl": "Puting polo na may watercolor na dahon at bukas na libro."
+  },
+  {
+    "image": "img/designs/ntm-blue.jpg",
+    "name": "National Teachers' Month · Blue",
+    "type": "Polo",
+    "description": "White polo with navy and gold hexagons and a lightbulb.",
+    "description_tl": "Puting polo na may navy at gold na hexagon at bombilya."
+  },
+  {
+    "image": "img/designs/smnhs-mapeh.jpg",
+    "name": "San Miguel NHS · MAPEH",
+    "type": "Shirt",
+    "description": "Blue and yellow brush strokes with a MAPEH department crest.",
+    "description_tl": "Asul at dilaw na brush strokes na may crest ng MAPEH."
+  },
+  {
+    "image": "img/designs/snakeskin-shorts.jpg",
+    "name": "Orange Fighting Marlins Shorts",
+    "type": "Shorts",
+    "description": "Black to silver scale fade with diamond side panels.",
+    "description_tl": "Itim hanggang silver na scale fade na may diamond sa gilid."
+  },
+  {
+    "image": "img/designs/noventa.jpg",
+    "name": "Noventa 1990",
+    "type": "Jersey",
+    "description": "Navy and gold script jersey for the Inter-Batchkadahan league.",
+    "description_tl": "Navy at gold na jersey para sa Inter-Batchkadahan na liga."
+  },
+  {
+    "image": "img/designs/noventa-shorts.jpg",
+    "name": "Noventa 1990 Shorts",
+    "type": "Shorts",
+    "description": "Matching navy shorts with gold lightning panels.",
+    "description_tl": "Kaparehong navy na shorts na may gold na kidlat."
+  },
+  {
+    "image": "img/designs/oson-es.jpg",
+    "name": "Oson Elementary School",
+    "type": "Shirt",
+    "description": "Green and gold waves with laurel leaves and a torch.",
+    "description_tl": "Berde at gold na alon na may laurel at sulo."
+  },
+  {
+    "image": "img/designs/ccstai-patriarchs.jpg",
+    "name": "CCSTAI Patriarchs",
+    "type": "Jersey",
+    "description": "White with navy and gold slashes and a lion crest.",
+    "description_tl": "Puti na may navy at gold na guhit at leon na crest."
+  },
+  {
+    "image": "img/designs/pencak-silat.jpg",
+    "name": "Luar Biasa Pencak Silat Team",
+    "type": "Shirt",
+    "description": "Black with red and gold brush strokes and a fighter silhouette.",
+    "description_tl": "Itim na may pula at gold na brush strokes at mandirigma."
+  },
+  {
+    "image": "img/designs/pickle-ville.jpg",
+    "name": "Pickle Ville Tabaco",
+    "type": "Shirt",
+    "description": "Royal blue with racing stripes and a Mayon logo.",
+    "description_tl": "Royal blue na may racing stripes at logo ng Mayon."
+  },
+  {
+    "image": "img/designs/primos-co.jpg",
+    "name": "Primos & Co. Pickleball",
+    "type": "Shirt",
+    "description": "Dark green with crossed paddles and a family motto on the back.",
+    "description_tl": "Dark green na may paddles at motto ng pamilya sa likod."
+  },
+  {
+    "image": "img/designs/san-marcos-youth.jpg",
+    "name": "San Marcos Youth Organization",
+    "type": "Shirt",
+    "description": "White with black ink-splatter and varsity numbers.",
+    "description_tl": "Puti na may itim na tilamsik at varsity na numero."
+  },
+  {
+    "image": "img/designs/phantom-dark.jpg",
+    "name": "Phantom · Dark",
+    "type": "Shirt",
+    "description": "Deep violet V-neck with cream filigree and a caduceus crest.",
+    "description_tl": "Deep violet na V-neck na may cream na filigree at caduceus."
+  },
+  {
+    "image": "img/designs/phantom-white.jpg",
+    "name": "Phantom · White",
+    "type": "Shirt",
+    "description": "White V-neck with violet star chevrons.",
+    "description_tl": "Puting V-neck na may violet na star chevron."
+  },
+  {
+    "image": "img/designs/phantom-jersey.jpg",
+    "name": "Phantom",
+    "type": "Jersey",
+    "description": "Matching basketball jersey in violet and cream filigree.",
+    "description_tl": "Kaparehong basketball jersey sa violet at cream na filigree."
+  },
+  {
+    "image": "img/designs/almmi-tiwi.jpg",
+    "name": "ALMMI Tiwi Chapter",
+    "type": "Chinese collar",
+    "description": "Yellow to black fade with music notes and a dancing pair.",
+    "description_tl": "Dilaw hanggang itim na may nota ng musika at nagsasayaw."
+  },
+  {
+    "image": "img/designs/deped-polo.jpg",
+    "name": "DepEd Faculty Polo",
+    "type": "Polo",
+    "description": "Navy polo with a woven diamond band and script name.",
+    "description_tl": "Navy na polo na may habing diamond band at script na pangalan."
+  },
+  {
+    "image": "img/designs/municipal-blue.jpg",
+    "name": "Bacacay Municipal Staff · Blue",
+    "type": "Chinese collar",
+    "description": "Royal blue waves with a halftone panel and town seal.",
+    "description_tl": "Royal blue na alon na may halftone at selyo ng bayan."
+  },
+  {
+    "image": "img/designs/municipal-pink.jpg",
+    "name": "Bacacay Municipal Staff · Pink",
+    "type": "Chinese collar",
+    "description": "Pink with sweeping white boomerang stripes.",
+    "description_tl": "Pink na may puting guhit na parang boomerang."
+  },
+  {
+    "image": "img/designs/municipal-orange.jpg",
+    "name": "Bacacay Municipal Staff · Orange",
+    "type": "Chinese collar",
+    "description": "Orange and cream waves with a halftone panel.",
+    "description_tl": "Orange at cream na alon na may halftone."
+  },
+  {
+    "image": "img/designs/municipal-red.jpg",
+    "name": "Bacacay Municipal Staff · Red",
+    "type": "Chinese collar",
+    "description": "Coral red with sweeping white stripes.",
+    "description_tl": "Coral red na may puting guhit."
+  },
+  {
+    "image": "img/designs/barz-chan-red.jpg",
+    "name": "Barz Chan",
+    "type": "Long sleeves",
+    "description": "Red and black rider jersey with checkered sleeves and services listed on the back.",
+    "description_tl": "Pula at itim na rider jersey na may checkered na manggas at serbisyo sa likod."
+  },
+  {
+    "image": "img/designs/batch88-blue.jpg",
+    "name": "TNHS Batch 88 · Blue",
+    "type": "Jersey",
+    "description": "Blue camo with a dragon shield crest.",
+    "description_tl": "Blue camo na may dragon shield crest."
+  },
+  {
+    "image": "img/designs/batch88-red.jpg",
+    "name": "TNHS Batch 88 · Red",
+    "type": "Jersey",
+    "description": "Red camo with a dragon shield crest.",
+    "description_tl": "Red camo na may dragon shield crest."
+  },
+  {
+    "image": "img/designs/camo-shorts.jpg",
+    "name": "TNHS Batch 88 Shorts",
+    "type": "Shorts",
+    "description": "Black camo shorts with red, white and blue side chevrons to match the Batch 88 jerseys.",
+    "description_tl": "Itim na camo shorts na may pula, puti at asul na chevron, kapares ng Batch 88 jersey."
+  },
+  {
+    "image": "img/designs/dragons.jpg",
+    "name": "Dragons",
+    "type": "Jersey",
+    "description": "Black and red with a coiling red dragon down the front.",
+    "description_tl": "Itim at pula na may pulang dragon sa harap."
+  },
+  {
+    "image": "img/designs/fighting-marlins.jpg",
+    "name": "Orange Fighting Marlins",
+    "type": "Jersey",
+    "description": "Orange scale pattern with a Joshua 1:9 verse on the back.",
+    "description_tl": "Orange na scale pattern na may Joshua 1:9 sa likod."
+  },
+  {
+    "image": "img/designs/tnhs-hawks.jpg",
+    "name": "TNHS '91 Hawks",
+    "type": "Jersey",
+    "description": "White and gold with an eagle mascot holding the ball.",
+    "description_tl": "Puti at gold na may agilang mascot na may hawak na bola."
+  },
+  {
+    "image": "img/designs/titans-united.jpg",
+    "name": "Titans United",
+    "type": "Jersey",
+    "description": "Cream base with pastel tribal trim and graffiti lettering.",
+    "description_tl": "Cream na base na may pastel tribal at graffiti na lettering."
+  },
+  {
+    "image": "img/designs/t1.jpg",
+    "name": "T1 Pickleball",
+    "type": "Polo",
+    "description": "Black polo with electric green chevrons and a flag patch.",
+    "description_tl": "Itim na polo na may electric green na guhit at watawat."
+  },
+  {
+    "image": "img/designs/acc-lakandangal.jpg",
+    "name": "Lakandangal CL 15-25",
+    "type": "Chinese collar",
+    "description": "Chinese-collar class shirt with a serpent front and a warrior crest on the back.",
+    "description_tl": "Chinese collar na class shirt na may ahas sa harap at mandirigmang crest sa likod."
+  },
+  {
+    "image": "img/designs/coast-guard.jpg",
+    "name": "Coast Guard Station Commander Course",
+    "type": "Chinese collar",
+    "description": "Navy Chinese collar with a hex-camo yoke, Philippine map and compass rose.",
+    "description_tl": "Navy na Chinese collar na may hex camo, mapa ng Pilipinas at compass."
+  },
+  {
+    "image": "img/designs/acc-psychology.jpg",
+    "name": "ACC Psychology",
+    "type": "Polo",
+    "description": "Sky-blue polo with a laurel psi crest, pillars and puzzle pieces.",
+    "description_tl": "Sky blue na polo na may psi crest, haligi at puzzle pieces."
+  },
+  {
+    "image": "img/designs/bu-fisheries.jpg",
+    "name": "BU Tabaco Fisheries",
+    "type": "Polo",
+    "description": "Clean white and purple department polo.",
+    "description_tl": "Malinis na puti at violet na polo ng departamento."
+  },
+  {
+    "image": "img/designs/pinagbobong-sk.jpg",
+    "name": "Pinagbobong SK",
+    "type": "Chinese collar",
+    "description": "Cream Chinese collar with topo lines and navy chevrons.",
+    "description_tl": "Cream na Chinese collar na may topo lines at navy na chevron."
+  },
+  {
+    "image": "img/designs/dnc-black.jpg",
+    "name": "DNC Tabaco · Black",
+    "type": "Shirt",
+    "description": "Train. Compete. Elevate. Mayon landscape on black.",
+    "description_tl": "Train. Compete. Elevate. Tanawin ng Mayon sa itim."
+  },
+  {
+    "image": "img/designs/dnc-white.jpg",
+    "name": "DNC Tabaco · White",
+    "type": "Shirt",
+    "description": "The same run-and-ride design in a white colorway.",
+    "description_tl": "Parehong disenyo sa puting kulay."
+  },
+  {
+    "image": "img/designs/dink-and-coffee.jpg",
+    "name": "Dink & Coffee",
+    "type": "Shirt",
+    "description": "Cream to espresso fade with coffee beans and a pickleball.",
+    "description_tl": "Cream hanggang espresso na may coffee beans at pickleball."
+  },
+  {
+    "image": "img/designs/drunken-dinks.jpg",
+    "name": "Drunken Dinks",
+    "type": "Shirt",
+    "description": "Black and gold with a beer-mug pickleball logo and bubbles.",
+    "description_tl": "Itim at gold na may beer mug na logo at bula."
+  },
+  {
+    "image": "img/designs/club-32.jpg",
+    "name": "The Club 32",
+    "type": "Shirt",
+    "description": "White to yellow to black fade with a paddle logo.",
+    "description_tl": "Puti, dilaw at itim na fade na may paddle na logo."
+  },
+  {
+    "image": "img/designs/200boys.jpg",
+    "name": "200Boys",
+    "type": "Shirt",
+    "description": "Gray and black raglan with \"No Limits.\" down the back.",
+    "description_tl": "Gray at itim na raglan na may \"No Limits.\" sa likod."
+  },
+  {
+    "image": "img/designs/sjccbcaed.jpg",
+    "name": "SJC CBCAED Volleyball",
+    "type": "Shirt",
+    "description": "Orange and white raglan with a bull and Greek key trim.",
+    "description_tl": "Orange at puting raglan na may toro at Greek key na trim."
+  },
+  {
+    "image": "img/designs/tcdj-dance-crew.jpg",
+    "name": "TCDJ Dance Crew",
+    "type": "Shirt",
+    "description": "Cream raglan with royal blue sleeves and chrome script logo.",
+    "description_tl": "Cream na raglan na may royal blue na manggas at chrome na logo."
+  },
+  {
+    "image": "img/designs/ms-pena.jpg",
+    "name": "Upper Ms. Peña Sports League",
+    "type": "Jersey",
+    "description": "Bold red with white stars and the league crest.",
+    "description_tl": "Matingkad na pula na may puting bituin at crest ng liga."
+  },
+  {
+    "image": "img/designs/matagbac.jpg",
+    "name": "Matagbac",
+    "type": "Jersey",
+    "description": "Navy with gold piping and classic serif numbers.",
+    "description_tl": "Navy na may gold na piping at klasikong numero."
+  },
+  {
+    "image": "img/designs/zone4.jpg",
+    "name": "Zone 4",
+    "type": "Jersey",
+    "description": "White tribal print with royal blue lettering.",
+    "description_tl": "Puting tribal print na may royal blue na lettering."
+  },
+  {
+    "image": "img/designs/colts-go.jpg",
+    "name": "The Colets Go",
+    "type": "Jersey",
+    "description": "Green with flame lettering and woven side panels.",
+    "description_tl": "Berde na may flame lettering at habing gilid."
+  },
+  {
+    "image": "img/designs/faith-x-hoop.jpg",
+    "name": "Faith x Hoop",
+    "type": "Jersey",
+    "description": "Indigo to black fade with arched varsity type.",
+    "description_tl": "Indigo hanggang itim na fade na may varsity na letra."
+  },
+  {
+    "image": "img/designs/dream-team.jpg",
+    "name": "Dream Team",
+    "type": "Jersey",
+    "description": "Royal blue with geometric side panels and a Psalm 23:1 back.",
+    "description_tl": "Royal blue na may geometric na gilid at Psalm 23:1 sa likod."
+  },
+  {
+    "image": "img/designs/nacocow-tcdj.jpg",
+    "name": "Nacocow 2026 · TCDJ",
+    "type": "Jersey",
+    "description": "Red tournament jersey with a flaming basketball crest.",
+    "description_tl": "Pulang jersey ng torneo na may nagliliyab na bola."
+  },
+  {
+    "image": "img/designs/m-ako.jpg",
+    "name": "Pickleball Club",
+    "type": "Polo",
+    "description": "Gold gradient with a minimal crest.",
+    "description_tl": "Gold gradient na may simpleng crest."
+  },
+  {
+    "image": "img/designs/m-dnd.jpg",
+    "name": "DND",
+    "type": "Polo",
+    "description": "Deep green, varsity lettering.",
+    "description_tl": "Deep green, varsity na lettering."
+  },
+  {
+    "image": "img/designs/m-nick.jpg",
+    "name": "Malinao",
+    "type": "Polo",
+    "description": "Loud colors, mascot artwork.",
+    "description_tl": "Matingkad na kulay at mascot artwork."
+  },
+  {
+    "image": "img/designs/m-pickle.jpg",
+    "name": "The Picklepals",
+    "type": "Shirt",
+    "description": "Classic two-tone with script logo.",
+    "description_tl": "Klasikong two-tone na may script na logo."
+  }
+]

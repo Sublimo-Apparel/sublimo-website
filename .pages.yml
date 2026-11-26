@@ -1,0 +1,36 @@
+# Pages CMS settings (https://pagescms.org)
+# Sign in at https://app.pagescms.org with your GitHub account and open this repository.
+
+media:
+  input: img/designs
+  output: img/designs
+  categories: [image]
+
+content:
+  - name: designs
+    label: Layout studio designs
+    type: file
+    path: data/designs.json
+    format: json
+    list: true
+    fields:
+      - name: image
+        label: Design image (square works best)
+        type: image
+        required: true
+      - name: name
+        label: Team or client name
+        type: string
+        required: true
+      - name: type
+        label: Type
+        type: select
+        required: true
+        options:
+          values: [Jersey, Polo, Chinese collar, Shirt, Long sleeves, Shorts, Singlet, Warmer]
+      - name: description
+        label: Short description (English)
+        type: string
+      - name: description_tl
+        label: Short description (Tagalog, optional)
+        type: string
