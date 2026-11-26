@@ -46,31 +46,156 @@
     });
   }
   /* ---------- Layout studio designs (from data/designs.json) ---------- */
-  const PAGE = 6;
+  const PAGE = 6, NEW_DAYS = 30, SETS = "Sets";
+  const MSGR = "https://m.me/sublimoph";
   const designs = { all: [], filter: "All", shown: PAGE };
   const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const src = p => String(p || "").replace(/^\/+/, "");   // keep paths relative (works on GitHub Pages)
-  const TYPE_TL = { "All": "Lahat", "Long sleeves": "Long sleeves" };
+  const TYPE_TL = { "All": "Lahat", [SETS]: "Mga terno" };
+  const code = d => "Layout/" + String(d.n).padStart(3, "0");
+  const isNew = d => { if (!d.added) return false; const t0 = Date.parse(d.added); return !isNaN(t0) && (Date.now() - t0) / 864e5 <= NEW_DAYS; };
+  const setOf = d => d.set ? designs.all.filter(x => x.set === d.set) : [];
+  const orderText = (d, o = {}) => {
+    const tl = lang === "tl";
+    let s = tl ? `Hi Sublimo! Interesado po ako sa design na katulad ng "${d.name}" (${code(d)}).`
+               : `Hi Sublimo! I'm interested in a design like "${d.name}" (${code(d)}).`;
+    if (o.team) s += tl ? ` Team/grupo: ${o.team}.` : ` Team/group: ${o.team}.`;
+    if (o.qty) s += tl ? ` Dami: ${o.qty} pcs.` : ` Quantity: ${o.qty} pcs.`;
+    if (o.note) s += ` ${o.note}`;
+    return s;
+  };
+  const orderLink = (d, o) => `${MSGR}?text=${encodeURIComponent(orderText(d, o))}`;
+  const orderBtn = (d, extra = "") => `<button type="button" data-order-ask="${d.n}" class="btn btn-acc btn-sm cursor-pointer ${extra}"><svg aria-hidden="true"><use href="#msgr"/></svg><span>${lang === "tl" ? "I-order ito" : "Order this design"}</span></button>`;
+
   function renderDesigns() {
     const grid = $("#designs"); if (!grid || !designs.all.length) return;
     const ORDER = ["Jersey", "Polo", "Chinese collar", "Shirt", "Long sleeves", "Shorts", "Singlet", "Warmer"];
     const rank = tp => (ORDER.indexOf(tp) + 1 || 99);
     const types = ["All", ...[...new Set(designs.all.map(d => d.type).filter(Boolean))].sort((a, b) => rank(a) - rank(b))];
+    if (designs.all.some(d => d.set)) types.push(SETS);
     $("#design-filters").innerHTML = types.length > 2 ? types.map(tp =>
-      `<button type="button" data-type="${esc(tp)}" aria-pressed="${tp === designs.filter}" class="chip shrink-0 cursor-pointer transition-colors hover:border-mint aria-pressed:border-mint aria-pressed:bg-mint aria-pressed:text-[#04110e]">${esc(lang === "tl" ? (TYPE_TL[tp] || tp) : tp)}</button>`).join("") : "";
-    const list = designs.all.map((d, i) => ({ ...d, n: i + 1 })).filter(d => designs.filter === "All" || d.type === designs.filter);
+      `<button type="button" data-type="${esc(tp)}" aria-pressed="${tp === designs.filter}" class="chip shrink-0 cursor-pointer transition-colors hover:border-mint aria-pressed:border-mint aria-pressed:bg-mint aria-pressed:text-[#04110e]">${tp === SETS ? '<svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/><path d="M11 7h4v6"/></svg>' : ""}${esc(lang === "tl" ? (TYPE_TL[tp] || tp) : (tp === SETS ? "Matching sets" : tp))}</button>`).join("") : "";
+    let list = designs.all;
+    if (designs.filter === SETS) {
+      const names = [...new Set(list.filter(d => d.set).map(d => d.set))];
+      list = names.flatMap(s => list.filter(d => d.set === s));
+    } else if (designs.filter !== "All") list = list.filter(d => d.type === designs.filter);
     grid.innerHTML = list.slice(0, designs.shown).map(d => {
       const desc = lang === "tl" && d.description_tl ? d.description_tl : d.description;
-      return `<button type="button" data-zoom data-src="${esc(src(d.image))}" data-cap="${esc(d.name)}" class="group grid grid-rows-[auto_1fr] cursor-zoom-in overflow-hidden border border-line bg-ink-2 text-left transition-colors hover:border-mint">
-        <img src="${esc(src(d.image))}" alt="${esc(d.name)} ${esc(d.type)} mockup" loading="lazy" class="aspect-square w-full object-cover">
-        <span class="grid content-start gap-1.5 px-5 pt-4.5 pb-5.5"><small class="font-display text-[.78rem] font-bold uppercase tracking-[.18em] text-mint">Layout/${String(d.n).padStart(3, "0")} · ${esc(d.type)}</small><b class="font-display text-[1.9rem] font-extrabold uppercase leading-[.9]">${esc(d.name)}</b>${desc ? `<span class="text-[.95rem] text-muted">${esc(desc)}</span>` : ""}</span>
-      </button>`;
+      const pieces = setOf(d).length;
+      return `<article class="grid grid-rows-[auto_1fr] overflow-hidden border border-line bg-ink-2 transition-colors hover:border-mint">
+        <button type="button" data-zoom data-design="${d.n}" data-src="${esc(src(d.image))}" data-cap="${esc(d.name)}" class="group relative block cursor-zoom-in overflow-hidden" aria-label="${esc(d.name)}: view larger">
+          <img src="${esc(src(d.image))}" alt="${esc(d.name)} ${esc(d.type)} mockup" loading="lazy" decoding="async" class="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.03]">
+          ${isNew(d) ? `<span class="absolute top-3 left-3 bg-mint px-2.5 py-1 font-display text-[.75rem] font-extrabold uppercase tracking-[.18em] text-[#04110e] shadow-lg">${lang === "tl" ? "Bago" : "New"}</span>` : ""}
+          ${pieces > 1 ? `<span class="absolute top-3 right-3 flex items-center gap-1.5 bg-ink/85 px-2.5 py-1 font-display text-[.75rem] font-bold uppercase tracking-[.16em] text-paper backdrop-blur"><svg viewBox="0 0 24 24" class="size-3.5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/><path d="M11 7h4v6"/></svg>${lang === "tl" ? "Terno" : "Set"} · ${pieces}</span>` : ""}
+        </button>
+        <div class="grid content-start gap-1.5 px-5 pt-4.5 pb-5.5">
+          <small class="font-display text-[.78rem] font-bold uppercase tracking-[.18em] text-mint">${code(d)} · ${esc(d.type)}</small>
+          <b class="font-display text-[1.9rem] font-extrabold uppercase leading-[.9]">${esc(d.name)}</b>
+          ${desc ? `<span class="text-[.95rem] text-muted">${esc(desc)}</span>` : ""}
+          <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+            ${orderBtn(d)}
+            ${pieces > 1 ? `<button type="button" data-zoom data-design="${d.n}" data-src="${esc(src(d.image))}" data-cap="${esc(d.name)}" class="cursor-pointer font-display text-[.8rem] font-bold uppercase tracking-[.16em] text-muted-2 underline decoration-mint underline-offset-4 hover:text-mint">${lang === "tl" ? `Tingnan ang terno (${pieces})` : `See the full set (${pieces})`}</button>` : ""}
+          </div>
+        </div>
+      </article>`;
     }).join("");
     $("#designs-more").hidden = list.length <= designs.shown;
   }
+
+  // Lightbox content for a design: big image, order button, and the rest of its set
+  function fillDesignBox(n) {
+    const d = designs.all.find(x => x.n === n), box = $("#lb-extra"); if (!d || !box) return;
+    $("#lb-img").src = src(d.image); $("#lb-img").alt = `${d.name} ${d.type} mockup`;
+    $("#lb-cap").textContent = `${d.name} · ${d.type}`;
+    const set = setOf(d);
+    box.innerHTML = `<div class="mt-4 flex justify-center">${orderBtn(d)}</div>` + (set.length > 1 ? `
+      <p class="mt-6 text-center font-display text-[.8rem] font-bold uppercase tracking-[.2em] text-mint">${lang === "tl" ? "Kumpletong terno" : "Complete the set"} · ${esc(d.set)}</p>
+      <div class="mt-3 flex flex-wrap justify-center gap-2">${set.map(x => `<button type="button" data-set-pick="${x.n}" aria-current="${x.n === d.n}" class="w-20 cursor-pointer border-2 border-transparent bg-ink-2 text-left aria-current:border-mint sm:w-24"><img src="${esc(src(x.image))}" alt="" class="aspect-square w-full object-cover"><span class="block truncate px-1.5 py-1 font-display text-[.68rem] font-bold uppercase tracking-[.1em]">${esc(x.type)}</span></button>`).join("")}</div>` : "");
+  }
+
+  // "Order this design" asks for confirmation first, then opens Messenger with the message
+  let orderDlg, orderCur;
+  function orderDialog() {
+    if (orderDlg) return orderDlg;
+    orderDlg = document.createElement("dialog");
+    orderDlg.id = "order-dlg";
+    orderDlg.setAttribute("aria-labelledby", "od-title");
+    orderDlg.className = "m-auto w-[min(92vw,520px)] max-h-[92vh] overflow-y-auto border border-line bg-ink-2 p-0 text-paper backdrop:bg-[rgb(5_6_5/.88)]";
+    document.body.appendChild(orderDlg);
+    orderDlg.addEventListener("click", e => { if (e.target === orderDlg) orderDlg.close(); });
+    orderDlg.addEventListener("input", () => updateOrderPreview());
+    orderDlg.addEventListener("click", e => {
+      if (e.target.closest("[data-od-cancel]")) orderDlg.close();
+      const go = e.target.closest("[data-od-go]");
+      if (go) {
+        const txt = orderText(orderCur, orderOpts());
+        try { navigator.clipboard && navigator.clipboard.writeText(txt).catch(() => {}); } catch (err) {}
+        setTimeout(() => { orderDlg.close(); toast(lang === "tl" ? "Nakopya rin ang mensahe. I-paste sa Messenger kung wala pa." : "Message also copied. Paste it in Messenger if it isn't filled in."); }, 50);
+      }
+    });
+    return orderDlg;
+  }
+  const orderOpts = () => ({
+    team: ($("#od-team") || {}).value?.trim(),
+    qty: ($("#od-qty") || {}).value?.trim(),
+    note: ($("#od-note") || {}).value?.trim()
+  });
+  function updateOrderPreview() {
+    if (!orderCur) return;
+    const o = orderOpts();
+    $("#od-preview").textContent = orderText(orderCur, o);
+    $("#od-go").href = orderLink(orderCur, o);
+  }
+  function openOrder(n) {
+    const d = designs.all.find(x => x.n === n); if (!d) return;
+    orderCur = d;
+    const tl = lang === "tl", dlg = orderDialog();
+    const field = (id, label, attrs) => `<label class="grid gap-1.5"><span class="font-display text-[.76rem] font-bold uppercase tracking-[.18em] text-muted">${label}</span><input id="${id}" ${attrs} class="min-h-11 w-full border border-line bg-ink px-3.5 py-2.5 text-[16px] text-paper outline-none placeholder:text-muted focus:border-mint"></label>`;
+    dlg.innerHTML = `
+      <div class="flex items-start justify-between gap-4 border-b border-line px-5 py-4">
+        <p id="od-title" class="font-display text-[1.6rem] font-extrabold uppercase leading-none">${tl ? "I-order ang design na ito?" : "Order this design?"}</p>
+        <button type="button" data-od-cancel aria-label="${tl ? "Isara" : "Close"}" class="grid size-10 shrink-0 cursor-pointer place-items-center border border-line text-xl hover:border-mint hover:text-mint">×</button>
+      </div>
+      <div class="grid gap-5 p-5">
+        <div class="flex items-center gap-4">
+          <img src="${esc(src(d.image))}" alt="" class="size-24 shrink-0 border border-line object-cover">
+          <div class="grid gap-1"><small class="font-display text-[.76rem] font-bold uppercase tracking-[.18em] text-mint">${code(d)} · ${esc(d.type)}</small><b class="font-display text-[1.6rem] font-extrabold uppercase leading-[.95]">${esc(d.name)}</b>${d.set ? `<span class="text-[.9rem] text-muted">${tl ? "Bahagi ng terno" : "Part of the"} ${esc(d.set)} ${tl ? "" : "set"}</span>` : ""}</div>
+        </div>
+        <p class="text-[.95rem] text-muted-2">${tl ? "Dadalhin ka namin sa Messenger kasama ang mensaheng ito. Puwede kang magdagdag ng detalye (opsyonal) para mas mabilis ang quote." : "We'll open Messenger with this message. Add details if you like (optional) so we can quote you faster."}</p>
+        <div class="grid gap-3 sm:grid-cols-[1fr_120px]">
+          ${field("od-team", tl ? "Pangalan ng team o grupo" : "Team or group name", `type="text" maxlength="60" autocomplete="organization" placeholder="${tl ? "hal. Tabaco Titans" : "e.g. Tabaco Titans"}"`)}
+          ${field("od-qty", tl ? "Dami" : "Quantity", `type="number" min="1" max="9999" inputmode="numeric" placeholder="15"`)}
+        </div>
+        ${field("od-note", tl ? "Ibang detalye" : "Other details", `type="text" maxlength="140" placeholder="${tl ? "hal. Kailangan bago Dis 15, ibang kulay" : "e.g. Need it by Dec 15, different colors"}"`)}
+        <div class="grid gap-2 border-l-2 border-mint bg-ink px-4 py-3">
+          <span class="font-display text-[.72rem] font-bold uppercase tracking-[.2em] text-mint">${tl ? "Mensaheng ipapadala" : "Your message"}</span>
+          <p id="od-preview" class="text-[.95rem]"></p>
+        </div>
+      </div>
+      <div class="sticky bottom-0 flex flex-wrap justify-end gap-2 border-t border-line bg-ink-2 px-5 py-4">
+        <button type="button" data-od-cancel class="btn btn-sm cursor-pointer">${tl ? "Kanselahin" : "Cancel"}</button>
+        <a id="od-go" data-od-go href="#" target="_blank" rel="noopener" class="btn btn-acc btn-sm"><svg aria-hidden="true"><use href="#msgr"/></svg><span>${tl ? "Ituloy sa Messenger" : "Continue to Messenger"}</span></a>
+      </div>`;
+    updateOrderPreview();
+    dlg.showModal();
+    setTimeout(() => { const t = $("#od-team"); if (t && matchMedia("(pointer: fine)").matches) t.focus(); }, 30);
+  }
+  document.addEventListener("click", e => {
+    const a = e.target.closest("[data-order-ask]"); if (!a) return;
+    e.preventDefault(); openOrder(+a.dataset.orderAsk);
+  });
+  let toastTimer;
+  function toast(msg) {
+    let el = $("#toast");
+    if (!el) { el = document.createElement("div"); el.id = "toast"; el.setAttribute("role", "status"); el.className = "fixed inset-x-4 bottom-5 z-[95] mx-auto max-w-md bg-paper px-5 py-3.5 text-center text-[.95rem] font-semibold text-ink shadow-2xl transition-opacity duration-300"; document.body.appendChild(el); }
+    el.textContent = msg; el.style.opacity = "1"; clearTimeout(toastTimer); toastTimer = setTimeout(() => { el.style.opacity = "0"; }, 3500);
+  }
+
   if ($("#designs")) {
     fetch("data/designs.json", { cache: "no-cache" }).then(r => r.json()).then(list => {
-      designs.all = Array.isArray(list) ? list.filter(d => d && d.image && d.name) : []; renderDesigns();
+      designs.all = (Array.isArray(list) ? list.filter(d => d && d.image && d.name) : []).map((d, i) => ({ ...d, n: i + 1 }));
+      renderDesigns();
     }).catch(() => { $("#designs").innerHTML = `<p class="text-muted">Designs couldn't load. Open the site through Live Server or GitHub Pages.</p>`; });
     $("#design-filters").addEventListener("click", e => { const b = e.target.closest("[data-type]"); if (!b) return; designs.filter = b.dataset.type; designs.shown = PAGE; renderDesigns(); });
     $("#designs-more").addEventListener("click", () => { designs.shown += PAGE; renderDesigns(); });
@@ -96,26 +221,19 @@
     menu.hidden = !open; burger.setAttribute("aria-expanded", String(open));
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     document.body.style.overflow = open ? "hidden" : "";
-    if (lenis) open ? lenis.stop() : lenis.start();
   }
   burger.addEventListener("click", () => setMenu(menu.hidden));
   addEventListener("keydown", e => { if (e.key === "Escape" && !menu.hidden) setMenu(false); });
   addEventListener("resize", () => { if (innerWidth >= 1024 && !menu.hidden) setMenu(false); });
 
-  /* ---------- Smooth scroll (Lenis, optional) ---------- */
-  let lenis = null;
-  if (window.Lenis && !reduce) {
-    try { lenis = new Lenis({ lerp: .09, smoothWheel: true }); const raf = n => { lenis.raf(n); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
-    catch (e) { lenis = null; }
-  }
+  /* ---------- In-page links (native scrolling: no scroll-jacking, no lag) ---------- */
   const subnav = $("#subnav");
   const offset = () => hdr.offsetHeight + (subnav ? subnav.offsetHeight : 0) + 8;
   $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
     const id = a.getAttribute("href"); if (id.length < 2) return;
     const el = $(id); if (!el) return;
     e.preventDefault();
-    if (lenis) lenis.scrollTo(el, { offset: -offset(), duration: 1.2 });
-    else scrollTo({ top: el.getBoundingClientRect().top + scrollY - offset(), behavior: reduce ? "auto" : "smooth" });
+    scrollTo({ top: el.getBoundingClientRect().top + scrollY - offset(), behavior: reduce ? "auto" : "smooth" });
     history.replaceState(null, "", id);
   }));
 
@@ -143,10 +261,17 @@
   if (lb) {
     const li = $("#lb-img"), lc = $("#lb-cap");
     document.addEventListener("click", e => {
+      const pick = e.target.closest("[data-set-pick]");
+      if (pick) { fillDesignBox(+pick.dataset.setPick); return; }
       const b = e.target.closest("[data-zoom]"); if (!b) return;
-      li.src = b.dataset.src; li.alt = $("img", b).alt;
-      lc.textContent = b.dataset.cap || $("span", b).textContent;
-      if (lb.showModal) lb.showModal();
+      const extra = $("#lb-extra");
+      if (b.dataset.design) fillDesignBox(+b.dataset.design);
+      else {
+        li.src = b.dataset.src; li.alt = ($("img", b) || {}).alt || "";
+        lc.textContent = b.dataset.cap || ($("span", b) || {}).textContent || "";
+        if (extra) extra.innerHTML = "";
+      }
+      if (lb.showModal && !lb.open) lb.showModal();
     });
     $("#lb-close").addEventListener("click", () => lb.close());
     lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
@@ -157,10 +282,12 @@
   if (cv) {
     const ctx = cv.getContext("2d"); let W, H, pts = [];
     const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); W = cv.width = r.width * d; H = cv.height = r.height * d;
-      pts = Array.from({ length: Math.round(r.width * r.height / 9000) }, () => ({ x: Math.random() * W, y: Math.random() * H, r: (Math.random() * 1.2 + .4) * d, v: (Math.random() * .15 + .03) * d, a: Math.random() * .6 + .2, m: Math.random() < .18 })); };
+      pts = Array.from({ length: Math.min(160, Math.round(r.width * r.height / (fine ? 9000 : 16000))) }, () => ({ x: Math.random() * W, y: Math.random() * H, r: (Math.random() * 1.2 + .4) * d, v: (Math.random() * .15 + .03) * d, a: Math.random() * .6 + .2, m: Math.random() < .18 })); };
+    let running = false;
     const draw = () => { ctx.clearRect(0, 0, W, H); for (const p of pts) { ctx.globalAlpha = p.a; ctx.fillStyle = p.m ? "#5CFFDD" : "#F4F5F1"; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
-      if (!reduce) { p.y -= p.v; if (p.y < 0) { p.y = H; p.x = Math.random() * W; } } } if (!reduce) requestAnimationFrame(draw); };
-    size(); draw(); addEventListener("resize", () => { size(); if (reduce) draw(); });
+      if (!reduce) { p.y -= p.v; if (p.y < 0) { p.y = H; p.x = Math.random() * W; } } } if (running) requestAnimationFrame(draw); };
+    size(); draw(); addEventListener("resize", () => { size(); if (!running) draw(); });
+    if (!reduce) new IntersectionObserver(es => { const vis = es[0].isIntersecting && !document.hidden; if (vis && !running) { running = true; requestAnimationFrame(draw); } else if (!vis) running = false; }).observe(cv);
   }
 
   /* ================= Motion layer ================= */
@@ -182,8 +309,8 @@
   const rvSel = "[data-rv-item], .label, .lede, .stat, .chip, .item, .step, .tabs";
   if (!reduce && "IntersectionObserver" in window) {
     const els = $$(rvSel).filter(el => !el.closest(".hero, .menu, .assemble, header, #subnav"));
-    els.forEach(el => { el.classList.add("rv"); const sib = [...el.parentElement.children].filter(c => c.matches(rvSel)); el.style.transitionDelay = Math.min(sib.indexOf(el), 6) * 80 + "ms"; });
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); if (e.target.classList.contains("label")) scramble(e.target, 650); } }), { rootMargin: "0px 0px -8% 0px" });
+    els.forEach(el => { el.classList.add("rv"); const sib = [...el.parentElement.children].filter(c => c.matches(rvSel)); el.style.transitionDelay = Math.min(sib.indexOf(el), 3) * 50 + "ms"; });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); if (e.target.classList.contains("label")) scramble(e.target, 650); } }), { rootMargin: "0px 0px 15% 0px" });   // start just BEFORE things scroll into view
     els.forEach(el => io.observe(el));
   }
 
@@ -210,7 +337,9 @@
       flies.forEach((f, i) => { const [fx, fy] = fpos[i]; f.style.transform = `translate(-50%,-50%) translate(${fx * (1 + k * .9)}vw,${fy * (1 + k * .9)}vh) rotate(${(i % 2 ? 5 : -5) * (1 + k * 2)}deg)`; f.style.opacity = Math.min(1, .15 + e * 1.2).toFixed(3); });
       as.classList.toggle("done", e > .97);
     };
-    upd(); if (!reduce) hooks.push(upd);
+    let asVis = false;
+    new IntersectionObserver(es => { asVis = es[0].isIntersecting; }).observe(as);
+    upd(); if (!reduce) hooks.push(() => { if (asVis) upd(); });
   }
 
   // Custom cursor (mouse only)
@@ -224,9 +353,11 @@
 
   // Scroll-velocity marquee
   const mqEl = $(".marquee"), mqTrack = $(".marquee-track");
-  if (mqEl && !reduce) {
-    let lastY = scrollY, vel = 0;
+  if (mqEl && !reduce && fine) {   // desktop only: phones just get the plain scrolling banner
+    let lastY = scrollY, vel = 0, mqVis = false;
+    new IntersectionObserver(es => { mqVis = es[0].isIntersecting; }).observe(mqEl);
     hooks.push(() => {
+      if (!mqVis) { lastY = scrollY; return; }
       const y = scrollY; vel = vel * .88 + (y - lastY) * .12; lastY = y;
       const v = Math.max(-12, Math.min(12, vel)); mqEl.style.transform = `skewX(${(-v * .6).toFixed(2)}deg)`;
       const an = mqTrack.getAnimations ? mqTrack.getAnimations()[0] : null; if (an) an.playbackRate = 1 + Math.min(5, Math.abs(v) * .35);

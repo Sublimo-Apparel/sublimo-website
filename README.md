@@ -119,13 +119,13 @@ To let a staff member help, invite them from Pages CMS or add them as a collabor
 | Navbar / footer links | `NAV` at the top of `js/layout.js` |
 | Fabrics, size charts, reviews | `js/data.js` |
 | Layout studio designs | Pages CMS, or `data/designs.json` + `img/designs/` |
+| Link preview image (Facebook, Messenger) | `img/og-image.png` (1200×630) |
 | Colors and fonts | `@theme` block in `src/input.css` |
 | Photos | Replace files in `img/` with the same name, or change the `src` |
 
 ## External resources
 
 - Fonts: Barlow and Barlow Condensed via Google Fonts
-- Smooth scrolling: [Lenis](https://github.com/darkroomengineering/lenis) via unpkg (the site works without it)
 
 ## Contact
 

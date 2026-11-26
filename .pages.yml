@@ -28,6 +28,12 @@ content:
         required: true
         options:
           values: [Jersey, Polo, Chinese collar, Shirt, Long sleeves, Shorts, Singlet, Warmer]
+      - name: set
+        label: Matching set (optional, same name on every piece of the set, e.g. "Vanguard")
+        type: string
+      - name: added
+        label: Date added (shows a NEW badge for 30 days)
+        type: date
       - name: description
         label: Short description (English)
         type: string
