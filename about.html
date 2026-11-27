@@ -27,11 +27,11 @@
 <main id="top">
 
   <!-- PAGE HEADER -->
-  <section class="page-head pt-40 pb-14 md:pt-48 md:pb-20">
+  <section class="page-head pt-32 pb-10 md:pt-36 md:pb-14">
     <div class="wrap grid gap-6">
       <p class="label" data-i18n="ab.label">About Sublimo</p>
       <div class="grid items-end gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
-        <h1 class="title-big"><span data-i18n="ab.t1">Beyond</span> <span class="text-mint" data-i18n="ab.t2">the print.</span></h1>
+        <h1 class="title-lg"><span data-i18n="ab.t1">Beyond</span> <span class="text-mint" data-i18n="ab.t2">the print.</span></h1>
         <p class="lede" data-i18n="ab.lede">A sublimation shop in Tabaco City, Albay, where team names, school colors and office logos become something people wear with pride.</p>
       </div>
     </div>
@@ -42,6 +42,7 @@
     <div class="wrap flex gap-7 overflow-x-auto [scrollbar-width:none]">
       <a href="#story" data-i18n="sub.story">Our story</a>
       <a href="#team" data-i18n="sub.team">The owners</a>
+      <a href="#staff" data-i18n="sub.staff">The crew</a>
       <a href="#podcast" data-i18n="sub.podcast">Podcast</a>
       <a href="#shop" data-i18n="sub.shop">The shop</a>
       <a href="#promise" data-i18n="sub.promise">What we stand for</a>
@@ -83,6 +84,20 @@
         <figure data-rv-item class="grid gap-4"><img src="img/team-geraldine.jpg" alt="Geraldine" loading="lazy" decoding="async" class="aspect-3/4 w-full object-cover"><figcaption><b class="block font-display text-[2rem] font-extrabold uppercase leading-none">Geraldine</b><span class="mt-2 block font-display text-[.8rem] font-bold uppercase tracking-[.2em] text-mint" data-i18n="tm.g">Co-owner &amp; Accountant</span></figcaption></figure>
         <figure data-rv-item class="grid gap-4"><img src="img/team-charlotte.jpg" alt="Charlotte Banda" loading="lazy" decoding="async" class="aspect-3/4 w-full object-cover"><figcaption><b class="block font-display text-[2rem] font-extrabold uppercase leading-none">Charlotte Banda</b><span class="mt-2 block font-display text-[.8rem] font-bold uppercase tracking-[.2em] text-mint" data-i18n="tm.c">Co-owner &amp; General Manager</span></figcaption></figure>
       </div>
+    </div>
+  </section>
+
+  <!-- STAFF (loaded from data/team.json, edit in Pages CMS) -->
+  <section class="section pt-0 bg-ink-2" id="staff">
+    <div class="wrap">
+      <div class="mb-10 grid items-end gap-6 border-t border-line pt-16 md:mb-14 md:pt-20 lg:grid-cols-[1.2fr_1fr] lg:gap-24">
+        <div class="grid gap-6">
+          <p class="label" data-i18n="st2.label">The crew</p>
+          <h2 class="title-lg"><span data-i18n="st2.t1">The team behind</span> <span class="text-mint" data-i18n="st2.t2">every order.</span></h2>
+        </div>
+        <p class="lede" data-i18n="st2.lede">Designers, production, and the people who answer your messages. Every jersey passes through their hands.</p>
+      </div>
+      <div id="staff-grid" class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4"></div>
     </div>
   </section>
 

@@ -201,12 +201,42 @@
     $("#designs-more").addEventListener("click", () => { designs.shown += PAGE; renderDesigns(); });
   }
 
+  /* ---------- About page staff (from data/team.json) ---------- */
+  const staff = { all: [] };
+  const ROLE_TL = {
+    "Production Manager": "Production Manager", "Production Assistant": "Production Assistant",
+    "Graphic Designer": "Graphic Designer", "Social Media Manager": "Social Media Manager",
+    "Customer Service Representative": "Customer Service", "On-call Staff": "On-call na staff"
+  };
+  const initials = n => String(n || "").replace(/\b[A-Z]\.\s*/g, "").split(/\s+/).filter(Boolean).map(w => w[0]).filter((c, i, arr) => i === 0 || i === arr.length - 1).join("").toUpperCase();
+  function renderStaff() {
+    const grid = document.getElementById("staff-grid"); if (!grid || !staff.all.length) return;
+    const e = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+    grid.innerHTML = staff.all.map(p => {
+      const role = lang === "tl" ? (ROLE_TL[p.role] || p.role) : p.role;
+      const pic = p.photo
+        ? `<img src="${e(String(p.photo).replace(/^\/+/, ""))}" alt="${e(p.name)}" loading="lazy" decoding="async" class="aspect-square w-full object-cover">`
+        : `<div class="relative grid aspect-square w-full place-items-center overflow-hidden bg-ink" aria-hidden="true">
+             <svg viewBox="0 0 874 729" class="absolute -right-6 -bottom-6 w-3/4 fill-paper opacity-[.04]"><use href="#mark"/></svg>
+             <span class="font-display text-[clamp(3rem,9vw,5rem)] font-black leading-none text-transparent [-webkit-text-stroke:1.5px_var(--color-mint)]">${e(initials(p.name))}</span>
+           </div>`;
+      return `<figure data-rv-item class="grid content-start border border-line bg-ink-2">${pic}
+        <figcaption class="grid gap-1.5 px-4 pt-3.5 pb-4"><b class="font-display text-[1.35rem] font-extrabold uppercase leading-[.95] md:text-[1.55rem]">${e(p.name)}</b><span class="font-display text-[.74rem] font-bold uppercase tracking-[.16em] text-mint">${e(role)}</span></figcaption></figure>`;
+    }).join("");
+  }
+  if (document.getElementById("staff-grid")) {
+    fetch("data/team.json", { cache: "no-cache" }).then(r => r.json()).then(list => {
+      staff.all = Array.isArray(list) ? list.filter(p => p && p.name) : []; renderStaff();
+      if (!staff.all.length) document.getElementById("staff").hidden = true;
+    }).catch(() => { document.getElementById("staff").hidden = true; });
+  }
+
   function applyLang(l) {
     lang = l; document.documentElement.lang = l === "tl" ? "tl" : "en";
     $$("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
     $$("[data-i18n-html]").forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
     $$(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === l)));
-    renderFabrics(); renderSizes(); renderReviews(); renderDesigns();
+    renderFabrics(); renderSizes(); renderReviews(); renderDesigns(); renderStaff();
     try { localStorage.setItem("sublimo-lang", l); } catch (e) {}
   }
   $$(".lang button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
@@ -233,7 +263,9 @@
     const id = a.getAttribute("href"); if (id.length < 2) return;
     const el = $(id); if (!el) return;
     e.preventDefault();
-    scrollTo({ top: el.getBoundingClientRect().top + scrollY - offset(), behavior: reduce ? "auto" : "smooth" });
+    const top = el.getBoundingClientRect().top + scrollY - offset();
+    const near = Math.abs(top - scrollY) < innerHeight * 1.2;   // short hops glide on desktop; long ones jump straight there
+    scrollTo({ top, behavior: (!reduce && fine && near) ? "smooth" : "instant" });
     history.replaceState(null, "", id);
   }));
 
@@ -244,11 +276,29 @@
     const mark = id => links.forEach(a => {
       const on = a.getAttribute("href") === "#" + id;
       a.setAttribute("aria-current", String(on));
-      if (on) a.scrollIntoView({ block: "nearest", inline: "nearest" });
+      if (on) {   // slide the tab strip sideways only. Never scroll the page itself
+        const strip = a.parentElement, l = a.offsetLeft, r = l + a.offsetWidth;
+        if (l < strip.scrollLeft || r > strip.scrollLeft + strip.clientWidth) strip.scrollTo({ left: Math.max(0, l - 20), behavior: "auto" });
+      }
     });
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) mark(e.target.id); }), { rootMargin: "-40% 0px -55% 0px" });
-    secs.forEach(s => io.observe(s));
-    if (secs[0]) mark(secs[0].id);
+    // Current section = the last one whose top has passed just below the menus (or the last one at the very bottom)
+    let curId = null, ticking = false, lock = 0;
+    const pick = () => {
+      ticking = false;
+      if (Date.now() < lock) return;
+      const line = offset() + 24;
+      let id = secs[0] && secs[0].id;
+      for (const s of secs) if (s.getBoundingClientRect().top <= line) id = s.id;
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) id = secs[secs.length - 1].id;
+      if (id !== curId) { curId = id; mark(id); }
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(pick); } }, { passive: true });
+    addEventListener("resize", pick);
+    links.forEach(a => a.addEventListener("click", () => {   // light up the tapped tab right away
+      curId = a.getAttribute("href").slice(1); mark(curId); lock = Date.now() + 700;
+      setTimeout(pick, 750);
+    }));
+    pick();
   }
 
   /* ---------- Size tabs ---------- */
@@ -307,8 +357,8 @@
 
   // Reveal on scroll
   const rvSel = "[data-rv-item], .label, .lede, .stat, .chip, .item, .step, .tabs";
-  if (!reduce && "IntersectionObserver" in window) {
-    const els = $$(rvSel).filter(el => !el.closest(".hero, .menu, .assemble, header, #subnav"));
+  if (!reduce && fine && "IntersectionObserver" in window) {   // phones: no fade-ins, content is simply there
+    const els = $$(rvSel).filter(el => !el.closest(".hero, .page-head, .menu, .assemble, header, #subnav") && el.getBoundingClientRect().top > innerHeight);
     els.forEach(el => { el.classList.add("rv"); const sib = [...el.parentElement.children].filter(c => c.matches(rvSel)); el.style.transitionDelay = Math.min(sib.indexOf(el), 3) * 50 + "ms"; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); if (e.target.classList.contains("label")) scramble(e.target, 650); } }), { rootMargin: "0px 0px 15% 0px" });   // start just BEFORE things scroll into view
     els.forEach(el => io.observe(el));

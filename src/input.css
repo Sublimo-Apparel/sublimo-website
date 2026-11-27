@@ -27,7 +27,7 @@
 
 /* ---------- Base ---------- */
 @layer base {
-  html { scroll-behavior: smooth; scroll-padding-top: 140px; color-scheme: dark; }
+  html { scroll-padding-top: 140px; color-scheme: dark; }
   body {
     @apply bg-ink text-paper font-body antialiased;
     font-size: 17px; line-height: 1.6; overflow-x: clip;

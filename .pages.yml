@@ -40,3 +40,22 @@ content:
       - name: description_tl
         label: Short description (Tagalog, optional)
         type: string
+
+  - name: team
+    label: Team members (About page)
+    type: file
+    path: data/team.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Role
+        type: string
+        required: true
+      - name: photo
+        label: Photo (optional, square works best; initials show if empty)
+        type: image
